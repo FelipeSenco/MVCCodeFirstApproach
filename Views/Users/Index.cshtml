@@ -1,0 +1,68 @@
+﻿@model List<EFDbFirstApproachExample.Models.User> 
+@{
+    ViewBag.Title = "User Registration";
+}
+
+<h2>User Registration</h2>
+<a href="/users/create" class="btn btn-info">Create</a>
+<table class="table table-secondary table-striped">
+    <tr>
+        <th style="width:5%">
+            ID
+        </th>
+        <th style="width:10%">
+            First Name
+        </th>
+        <th style="width:10%">
+            Last Name
+        </th>
+        <th style="width:5%">
+            Mobile
+        </th>
+        <th style="width:10%">
+            Email
+        </th>
+        <th style="width:50%">
+            Hobbies
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(temp => item.UserID)</td>
+    <td>@Html.DisplayFor(temp => item.FirstName)</td>
+    <td>@Html.DisplayFor(temp => item.LastName)</td>
+    <td>@Html.DisplayFor(temp => item.Mobile)</td>
+    <td>@Html.DisplayFor(temp => item.Email)</td>
+    <td>
+        @if (item.Photography)
+        {
+            <span>Photography</span>
+        }
+        @if (item.Gardening)
+        {
+            <span>Gardening</span>
+        }
+        @if (item.Dance)
+        {
+            <span>Dance</span>
+        }
+        @if (item.Hiking)
+        {
+            <span>Hiking</span>
+        }
+        @if (item.Painting)
+        {
+            <span>Painting</span>
+        }        
+    </td>
+
+    <td>       
+        <a href="/users/delete?id=@item.UserID" class="btn btn-danger">Delete</a>
+    </td>
+</tr>
+    }
+    
+
+</table>

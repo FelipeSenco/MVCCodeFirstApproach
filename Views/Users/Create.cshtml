@@ -1,0 +1,69 @@
+﻿@model EFDbFirstApproachExample.Models.User
+@using EFDbFirstApproachExample.HtmlHelpers
+@{
+    ViewBag.Title = "Create User";
+}
+
+<h2>Create User</h2>
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-row row mt-2">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.FirstName)
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First Name" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LastName)
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+    </div>
+    <div class="form-row row mt-2">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+        </div>
+        <div class="form-check col-md-6">
+            @Html.LabelFor(model => model.Mobile)
+            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", placeholder= "00000-000000" })
+        </div>
+    </div>
+    <div class="hobbies mt-3">
+        <span style="font-weight:bold">Hobbies</span>
+        <div class="row">
+            <div class="form-check col-md-1">
+                @Html.CheckBoxFor(model => model.Photography, new { @class = "form-check-input", value="true" })
+                @Html.LabelFor(model => model.Photography, new { @class = "form-check-label" })
+            </div>
+            <div class="form-check col-md-1">
+                @Html.CheckBoxFor(model => model.Gardening, new { @class = "form-check-input", value = "true" })
+                @Html.LabelFor(model => model.Gardening, new { @class = "form-check-label" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-check col-md-1">
+                @Html.CheckBoxFor(model => model.Dance, new { @class = "form-check-input", value = "true" })
+                @Html.LabelFor(model => model.Dance, new { @class = "form-check-label" })
+            </div>
+            <div class="form-check col-md-1">
+                @Html.CheckBoxFor(model => model.Hiking, new { @class = "form-check-input", value = "true" })
+                @Html.LabelFor(model => model.Hiking, new { @class = "form-check-label" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-check col-md-1">
+                @Html.CheckBoxFor(model => model.Painting, new { @class = "form-check-input", value = "true" })
+                @Html.LabelFor(model => model.Painting, new { @class = "form-check-label" })
+            </div>
+        </div>
+    </div>
+        
+    
+
+    @Html.ValidationSummary()
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success">Create</button>
+        <a class="btn btn-danger" href="/users/index">Cancel</a>
+    </div>
+}

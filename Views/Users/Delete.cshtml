@@ -1,0 +1,20 @@
+﻿@model EFDbFirstApproachExample.Models.User
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete @Model.FirstName</h2>
+<form accept-charset="/users/delete" method="post">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="UserName">User Name</label>
+            <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+            @Model.FirstName @Model.LastName
+        </div>        
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-danger" href="/users/index">Cancel</a>
+    </div>
+</form>
