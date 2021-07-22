@@ -1,15 +1,18 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EFDbFirstApproachExample.Models;
+using EFDbFirstApproachExample.Filters;
 
-namespace EFDbFirstApproachExample.Controllers
+namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class BrandsController : Controller
     {
-        // GET: Brands
+        // GET: Brands/Index
         public ActionResult Index()
         {
             CompanyDbContext db = new CompanyDbContext();
@@ -18,3 +21,4 @@ namespace EFDbFirstApproachExample.Controllers
         }
     }
 }
+

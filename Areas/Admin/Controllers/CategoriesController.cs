@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EFDbFirstApproachExample.Models;
+using EFDbFirstApproachExample.Filters;
 
-namespace EFDbFirstApproachExample.Controllers
+namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class CategoriesController : Controller
     {
         // GET: Categories

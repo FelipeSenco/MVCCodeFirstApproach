@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EFDbFirstApproachExample.Filters;
 
-namespace EFDbFirstApproachExample.Controllers
+namespace EFDbFirstApproachExample.Areas.Manager.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: /Home/Index
-        [MyActionFilter]
-        [MyResultFilter]
-        [OutputCache(Duration = 20)]
+        // GET: Manager/Home/Index
         public ActionResult Index()
         {
             return View();

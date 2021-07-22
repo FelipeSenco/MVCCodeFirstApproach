@@ -1,0 +1,1 @@
+Message: Attempted to divide by zero., Type: System.DivideByZeroException, Source: EFDbFirstApproachExample

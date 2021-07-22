@@ -5,8 +5,9 @@
 }
 
 <h2>Create Product</h2>
-@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Products", new { area = "Admin"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <div class="form-row row mt-2">
         <div class="form-group col-md-6">
             @Html.LabelFor(model => model.ProductID)
@@ -49,7 +50,7 @@
     </div>
     <div class="form-row mt-3">
         <div class="form-check">
-            @Html.CheckBoxFor(model => model.Active.Value, new { @class = "form-check-input", value = "true" })
+            @Html.CheckBoxFor(model => model.Active, new { @class = "form-check-input", value = "true" })
             @Html.LabelFor(model => model.Active, new { @class = "form-check-label"})
         </div>
     </div>
@@ -57,7 +58,7 @@
     @Html.ValidationSummary()
     <div class="mt-3">
         <button type="submit" class="btn btn-success">Create</button>
-        <a class="btn btn-danger" href="/products/index">Cancel</a>
+        <a class="btn btn-danger" href="/admin/products/index">Cancel</a>
     </div>
 }
 

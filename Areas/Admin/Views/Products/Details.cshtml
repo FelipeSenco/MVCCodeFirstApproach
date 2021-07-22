@@ -1,0 +1,63 @@
+﻿@model EFDbFirstApproachExample.Models.Product
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<h2>Product Details</h2>
+<table class="table">
+    <tr>
+        <th>Product ID</th>
+        <td>@Model.ProductID</td>
+    </tr>
+    <tr>
+        <th>Product Name</th>
+        <td>@Model.ProductName</td>
+    </tr>
+    <tr>
+        <th>Product Price</th>
+        <td>
+            @if (Model.Price != null)
+            {
+            <span>@Model.Price.Value.ToString()</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Date of Purchase</th>
+        <td>
+            @if (Model.DateOfPurchase != null)
+            {
+            <span>@Model.DateOfPurchase.Value.ToString("d/M/yyyy")</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Availability</th>
+        <td>@Model.AvailabilityStatus</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>
+            @if (Model.Category != null)
+            {
+               <span>@Model.Category.CategoryName</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Brand</th>
+        <td>
+            @if (Model.Brand != null)
+            {
+                <span>@Model.Brand.BrandName</span>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Active</th>
+        <td>@Model.Active</td>
+    </tr>
+</table>
+
+<a href="/admin/products/index">Back to Products</a>
+

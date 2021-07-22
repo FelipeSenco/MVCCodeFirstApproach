@@ -32,14 +32,16 @@ namespace EFDbFirstApproachExample.Models
         [Required(ErrorMessage = "This is a required field")]
         public string AvailabilityStatus { get; set; }
 
+        [Required(ErrorMessage = "Category is necessary")]
         [Display(Name = "Category ID")]
-        public Nullable<long> CategoryID { get; set; }
+        public long CategoryID { get; set; }
 
+        [Required(ErrorMessage = "Brand is necessary")]
         [Display(Name = "Brand ID")]
-        public Nullable<long> BrandID { get; set; }
+        public long BrandID { get; set; }
 
         [Display(Name = "Active")]
-        public Nullable<bool> Active { get; set; }
+        public bool Active { get; set; }
 
         public string Photo { get; set; }
 

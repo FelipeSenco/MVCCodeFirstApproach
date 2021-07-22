@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.css" rel="stylesheet"/>
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.6.0.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
@@ -15,36 +15,29 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-info navbar-dark">
-        <a class="navbar-brand" href="#">Company</a>
+        <a class="navbar-brand" href="#">Admin</a>
         <div class="col-8">
             <ul class="navbar-nav text-dark">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/Home/index">Home</a>
-                </li>     
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/Products/index">Products</a>
+                    <a class="nav-link text-dark" href="/admin/home/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/Users/index">Users(lesson assigment)</a>
+                    <a class="nav-link text-dark" href="/admin/Categories/index">Categories</a>
                 </li>
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/Account/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/Account/login">Login</a>
-                    </li>
-                }
-
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/Brands/index">Brands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/Products/index">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/admin/Users/index">Users</a>
+                </li>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="/Account/logout">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/Account/MyProfile">My Profile</a>
-                    </li>
+                    </li>                    
                 }
             </ul>
         </div>
@@ -54,10 +47,10 @@
                 Welcome @User.Identity.Name
             </div>
         }
-        
-    </nav>  
+
+    </nav>
     <div class="container-fluid">
-       @RenderBody()
+        @RenderBody()
     </div>
 </body>
 </html>

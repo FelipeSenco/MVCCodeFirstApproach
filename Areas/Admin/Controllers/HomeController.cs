@@ -5,14 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using EFDbFirstApproachExample.Filters;
 
-namespace EFDbFirstApproachExample.Controllers
+namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class HomeController : Controller
     {
-        // GET: /Home/Index
-        [MyActionFilter]
-        [MyResultFilter]
-        [OutputCache(Duration = 20)]
+        // GET: /Admin/Home/Index
         public ActionResult Index()
         {
             return View();
