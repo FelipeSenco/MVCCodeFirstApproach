@@ -1,4 +1,4 @@
-﻿@model EFDbFirstApproachExample.Models.Product
+﻿@model Company.DomainModels.Product
 @{
     ViewBag.Title = "Product Details";
 }
@@ -18,7 +18,7 @@
         <td>
             @if (Model.Price != null)
             {
-            <span>@Model.Price.Value.ToString()</span>
+                <span>@Model.Price.Value.ToString()</span>
             }
         </td>
     </tr>
@@ -27,7 +27,7 @@
         <td>
             @if (Model.DateOfPurchase != null)
             {
-            <span>@Model.DateOfPurchase.Value.ToString("d/M/yyyy")</span>
+                <span>@Model.DateOfPurchase.Value.ToString("d/M/yyyy")</span>
             }
         </td>
     </tr>
@@ -40,7 +40,7 @@
         <td>
             @if (Model.Category != null)
             {
-               <span>@Model.Category.CategoryName</span>
+                <span>@Model.Category.CategoryName</span>
             }
         </td>
     </tr>

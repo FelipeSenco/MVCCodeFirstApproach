@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EFDbFirstApproachExample.Models;
+using Company.DomainModels;
 using EFDbFirstApproachExample.Filters;
+using Company.DataLayer;
+using Company.ServiceContracts;
+using Company.ServiceLayer;
 
 namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 {
     [AdminAuthorization]
     public class ProductsController : Controller
     {
+        CompanyDbContext db;
+        IProductService prodService;
+
+        public ProductsController(IProductService pService)
+        {
+            this.db = new CompanyDbContext();
+            this.prodService = pService;
+        }
+
         // GET: Products
         public ActionResult Index(string search = "", string sortColumn = "ProductName", string iconClass = "fa-sort-desc", int PageNo = 1)
         {
             ViewBag.search = search;
-            CompanyDbContext db = new CompanyDbContext();
-            List<Product> products = db.Products.Where(temp => temp.ProductName.Contains(search)).ToList();
+            List<Product> products = prodService.SearchProducts(search);
 
             ViewBag.SortColumn = sortColumn;
             ViewBag.IconClass = iconClass;
@@ -112,24 +123,21 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 
         public ActionResult Details(long id)
         {
-            CompanyDbContext db = new CompanyDbContext();
-            Product p = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+            Product p = prodService.GetProductById(id);
             return View(p);
         }
 
         public ActionResult Create()
-        {
-            CompanyDbContext db = new CompanyDbContext();
-            ViewBag.Categories = db.Categories.ToList();
-            ViewBag.Brands = db.Brands.ToList();
+        {            
+            ViewData["Categories"] = db.Categories.ToList();//ViewData is what ViewBag uses internally to send data to the View.
+            ViewBag.Brands = db.Brands.ToList();//It is most common to use ViewBag as it is dynamically typed and you don't need to specify the data type at the view.
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID, ProductName, Price, DateOfPurchase, AvailabilityStatus, CategoryID, BrandID, Active, Photo")] Product p)
-        {
-            CompanyDbContext db = new CompanyDbContext();
+        {           
             if (ModelState.IsValid)
             {
                 if (Request.Files.Count >= 1)
@@ -140,8 +148,7 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
                     var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                     p.Photo = base64String;
                 }
-                db.Products.Add(p);
-                db.SaveChanges();
+                prodService.InsertProduct(p);
                 return RedirectToAction("Index");
             }
             else
@@ -154,8 +161,7 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 
         public ActionResult Edit(long id)
         {
-            CompanyDbContext db = new CompanyDbContext();
-            Product existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+            Product existingProduct = prodService.GetProductById(id);
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Brands = db.Brands.ToList();
             return View(existingProduct);
@@ -174,8 +180,7 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
                     file.InputStream.Read(imgBytes, 0, file.ContentLength);
                     var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                     p.Photo = base64String;
-                }
-                CompanyDbContext db = new CompanyDbContext();
+                }               
                 Product existingProduct = db.Products.Where(temp => temp.ProductID == p.ProductID).FirstOrDefault();
                 existingProduct.ProductName = p.ProductName;
                 existingProduct.Price = p.Price;
@@ -184,7 +189,7 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
                 existingProduct.CategoryID = p.CategoryID;
                 existingProduct.BrandID = p.BrandID;
                 existingProduct.Active = p.Active;
-                db.SaveChanges();
+                prodService.UpdateProduct(existingProduct);
             }
             
             return RedirectToAction("Index");
@@ -192,18 +197,14 @@ namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 
         public ActionResult Delete(long id)
         {
-            CompanyDbContext db = new CompanyDbContext();
-            Product p = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+            Product p = prodService.GetProductById(id);
             return View(p);
         }
 
         [HttpPost]
-        public ActionResult Delete(Product p)
+        public ActionResult Delete(long id, Product p)
         {
-            CompanyDbContext db = new CompanyDbContext();
-            Product existingProduct = db.Products.Where(temp => temp.ProductID == p.ProductID).FirstOrDefault();
-            db.Products.Remove(existingProduct);
-            db.SaveChanges();
+            prodService.DeleteProduct(id);        
             return RedirectToAction("Index");
         }
     }

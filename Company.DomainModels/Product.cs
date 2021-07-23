@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using EFDbFirstApproachExample.CustomValidations;
 
-namespace EFDbFirstApproachExample.Models
+
+namespace Company.DomainModels
 {
     public class Product
     {
         [Key]
-        [Display(Name ="Product ID")]
+        [Display(Name = "Product ID")]
         public long ProductID { get; set; }
 
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Must provide a name")]
         [RegularExpression(@"^[A-Za-z ]*$", ErrorMessage = "Alphabets only")]
-        [MaxLength(20, ErrorMessage ="Product name must not exceed 20 characters")]
+        [MaxLength(20, ErrorMessage = "Product name must not exceed 20 characters")]
         public string ProductName { get; set; }
 
         [Display(Name = "Price")]
@@ -46,7 +46,7 @@ namespace EFDbFirstApproachExample.Models
         public string Photo { get; set; }
 
         public Nullable<decimal> Quantity { get; set; }
-       
+
 
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace EFDbFirstApproachExample.CustomValidations
+namespace Company.DomainModels
 {
     public class DivisibleBy10Attribute : ValidationAttribute
     {

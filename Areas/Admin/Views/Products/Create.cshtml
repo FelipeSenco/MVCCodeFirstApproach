@@ -1,17 +1,17 @@
-﻿@model EFDbFirstApproachExample.Models.Product
-    @using EFDbFirstApproachExample.HtmlHelpers
+﻿@model Company.DomainModels.Product
+@using EFDbFirstApproachExample.HtmlHelpers
 @{
     ViewBag.Title = "Create Product";
 }
 
 <h2>Create Product</h2>
-@using (Html.BeginForm("Create", "Products", new { area = "Admin"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Products", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-row row mt-2">
         <div class="form-group col-md-6">
             @Html.LabelFor(model => model.ProductID)
-            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", placeholder = "Product Name"})  
+            @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", placeholder = "Product Name" })
             @Html.ValidationMessageFor(model => model.ProductName)
         </div>
         <div class="form-group col-md-6">
@@ -37,7 +37,7 @@
     <div class="form-row row mt-2">
         <div class="form-group col-md-6">
             @Html.LabelFor(model => model.CategoryID)
-            @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.CategoryID, new SelectList((List<Company.DomainModels.Category>)ViewData["Categories"], "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
         </div>
         <div class="form-group col-md-6">
             @Html.LabelFor(model => model.BrandID)
@@ -51,7 +51,7 @@
     <div class="form-row mt-3">
         <div class="form-check">
             @Html.CheckBoxFor(model => model.Active, new { @class = "form-check-input", value = "true" })
-            @Html.LabelFor(model => model.Active, new { @class = "form-check-label"})
+            @Html.LabelFor(model => model.Active, new { @class = "form-check-label" })
         </div>
     </div>
 
